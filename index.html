@@ -117,12 +117,37 @@ tailwind.config = {
      TOP NAVIGATION
 ───────────────────────────────────────── -->
 <nav class="sticky top-0 w-full z-50 bg-emerald-50/75 backdrop-blur-2xl shadow-[0_20px_40px_rgba(25,28,27,.06)] font-headline tracking-tight">
-  <!-- Row 1: Logo + CTA -->
-  <div class="flex justify-between items-center px-4 md:px-8 py-1 md:py-0 max-w-screen-xl mx-auto">
-    <div class="flex items-center gap-2 cursor-pointer" onclick="go('home')">
-      <img src="logo.png" alt="TL Handwerker Logo" class="h-12 md:h-24 w-auto"/>
-      <div class="text-[1.1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none hidden sm:block">TL Handwerker</div>
+  <div class="flex justify-between items-center px-3 md:px-8 py-1 md:py-0 max-w-screen-xl mx-auto">
+    <!-- Mobile: icons left of logo | Desktop: logo + name -->
+    <div class="flex items-center gap-1">
+      <!-- 6 icon buttons — mobile only, left of logo -->
+      <div class="flex items-center md:hidden">
+        <button class="flex items-center justify-center p-1.5 text-primary" onclick="go('home')">
+          <span class="material-symbols-outlined mat-fill" style="font-size:20px">home</span>
+        </button>
+        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('handwerker')">
+          <span class="material-symbols-outlined mat" style="font-size:20px">construction</span>
+        </button>
+        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('hauswartungen')">
+          <span class="material-symbols-outlined mat" style="font-size:20px">home_work</span>
+        </button>
+        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('reinigung')">
+          <span class="material-symbols-outlined mat" style="font-size:20px">cleaning_services</span>
+        </button>
+        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('schadensmeldung')">
+          <span class="material-symbols-outlined mat" style="font-size:20px">emergency</span>
+        </button>
+        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('kontakt')">
+          <span class="material-symbols-outlined mat" style="font-size:20px">phone</span>
+        </button>
+      </div>
+      <!-- Logo -->
+      <div class="flex items-center gap-2 cursor-pointer" onclick="go('home')">
+        <img src="logo.png" alt="TL Handwerker Logo" class="h-12 md:h-24 w-auto"/>
+        <div class="text-[1.1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none hidden sm:block">TL Handwerker</div>
+      </div>
     </div>
+    <!-- Desktop nav links -->
     <ul class="hidden md:flex items-center gap-8">
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-home"            onclick="go('home')">Home</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-handwerker"      onclick="go('handwerker')">Handwerker Service</a></li>
@@ -131,35 +156,9 @@ tailwind.config = {
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-schadensmeldung" onclick="go('schadensmeldung')">Schadensmeldung</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-kontakt"         onclick="go('kontakt')">Kontakt</a></li>
     </ul>
-    <button class="bg-primary-container text-on-primary-container px-4 py-2 md:px-6 md:py-2.5 rounded-full font-bold text-xs md:text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
+    <!-- Anfragen — desktop only -->
+    <button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
       Anfragen
-    </button>
-  </div>
-  <!-- Row 2: Mobile icon nav (hidden on desktop) -->
-  <div class="md:hidden grid grid-cols-6 border-t border-black/5 pb-1">
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-primary" onclick="go('home')">
-      <span class="material-symbols-outlined mat-fill" style="font-size:20px">home</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Home</span>
-    </button>
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-on-surface-variant" onclick="go('handwerker')">
-      <span class="material-symbols-outlined mat" style="font-size:20px">construction</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Handwerk</span>
-    </button>
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-on-surface-variant" onclick="go('hauswartungen')">
-      <span class="material-symbols-outlined mat" style="font-size:20px">home_work</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Hauswart</span>
-    </button>
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-on-surface-variant" onclick="go('reinigung')">
-      <span class="material-symbols-outlined mat" style="font-size:20px">cleaning_services</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Reinigung</span>
-    </button>
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-on-surface-variant" onclick="go('schadensmeldung')">
-      <span class="material-symbols-outlined mat" style="font-size:20px">emergency</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Schaden</span>
-    </button>
-    <button class="flex flex-col items-center gap-0.5 py-1.5 text-on-surface-variant" onclick="go('kontakt')">
-      <span class="material-symbols-outlined mat" style="font-size:20px">phone</span>
-      <span class="text-[8px] uppercase tracking-widest font-bold">Kontakt</span>
     </button>
   </div>
 </nav>
