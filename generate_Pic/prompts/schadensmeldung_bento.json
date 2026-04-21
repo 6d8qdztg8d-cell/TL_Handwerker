@@ -1,0 +1,9 @@
+{
+  "prompt": "Hyper-realistic close-up of water damage or burst pipe in a Swiss apartment building corridor, square format. Wet floor with water stain on white wall, urgent but clean documentation photo. Cool fluorescent lighting, 35mm lens, f/5.6, ISO 400. No people, no text. Photorealistic, documentary style, no AI filters.",
+  "negative_prompt": "blurry, cartoon, CGI, oversaturated, plastic, text, watermark, people, dramatic fire",
+  "api_parameters": {
+    "aspect_ratio": "1:1",
+    "resolution": "1K",
+    "output_format": "jpg"
+  }
+}

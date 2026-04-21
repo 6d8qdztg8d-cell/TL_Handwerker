@@ -1,0 +1,9 @@
+{
+  "prompt": "Hyper-realistic professional cleaning scene, wide landscape format 2:1. A professional Swiss cleaning team member in crisp white uniform wiping down a gleaming marble floor in a modern Swiss apartment building corridor. Bright diffused overhead lighting, clean white walls, polished surfaces reflecting soft light. Mop bucket nearby, streak-free floor. 24mm wide lens, f/5.6, ISO 200, clean digital, no grain. Photorealistic, documentary style. No AI filters, no beautification, no studio backdrop.",
+  "negative_prompt": "blurry, low resolution, cartoon, CGI, oversaturated, plastic look, airbrushed, studio lighting, fake background, text, watermark, logo, busy composition, clutter",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  }
+}

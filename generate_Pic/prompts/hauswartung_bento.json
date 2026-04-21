@@ -1,0 +1,9 @@
+{
+  "prompt": "Hyper-realistic Swiss residential apartment building exterior, square format. Clean modern multi-family building facade in Bern Switzerland, well-maintained entrance with polished stone steps, green landscaping, warm afternoon light. 35mm lens, f/5.6, ISO 200, clean digital. No people, no text, no logos. Photorealistic, architectural photography style.",
+  "negative_prompt": "blurry, cartoon, CGI, oversaturated, plastic, text, watermark, people, cars, busy composition",
+  "api_parameters": {
+    "aspect_ratio": "1:1",
+    "resolution": "1K",
+    "output_format": "jpg"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "prompt": "Hyper-realistic professional Swiss handyman craftsman at work, wide landscape format 16:9. Close-up hands of a skilled tradesman in work gloves precisely installing a door hinge or shelf bracket in a modern Swiss apartment. Tool belt visible, clean workshop environment, warm natural light from window. 35mm lens, f/4.0, ISO 200, tack sharp, clean digital. No text, no logos. Documentary style, no AI filters, no plastic look.",
+  "negative_prompt": "blurry, cartoon, CGI, oversaturated, plastic skin, airbrushed, studio backdrop, text, watermark, clutter, messy workspace, dark lighting",
+  "api_parameters": {
+    "aspect_ratio": "16:9",
+    "resolution": "1K",
+    "output_format": "jpg"
+  }
+}

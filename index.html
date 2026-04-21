@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>TL Handwerker – Bern & Umgebung</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        "primary":                    "#0d631b",
+        "primary-container":          "#2e7d32",
+        "primary-fixed":              "#a3f69c",
+        "primary-fixed-dim":          "#88d982",
+        "on-primary":                 "#ffffff",
+        "on-primary-container":       "#cbffc2",
+        "on-primary-fixed":           "#002204",
+        "surface":                    "#f8faf8",
+        "surface-bright":             "#f8faf8",
+        "surface-container-low":      "#f2f4f2",
+        "surface-container-lowest":   "#ffffff",
+        "surface-container":          "#eceeec",
+        "surface-container-high":     "#e6e9e7",
+        "surface-container-highest":  "#e1e3e1",
+        "surface-dim":                "#d8dad9",
+        "on-surface":                 "#191c1b",
+        "on-surface-variant":         "#40493d",
+        "on-background":              "#191c1b",
+        "background":                 "#f8faf8",
+        "outline":                    "#707a6c",
+        "outline-variant":            "#bfcaba",
+        "secondary":                  "#4c616c",
+        "secondary-container":        "#cfe6f2",
+        "on-secondary":               "#ffffff",
+        "error":                      "#ba1a1a",
+        "error-container":            "#ffdad6",
+        "on-error":                   "#ffffff",
+        "tertiary":                   "#923357",
+        "inverse-surface":            "#2e3130",
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg":      "0.25rem",
+        "xl":      "0.5rem",
+        "full":    "0.75rem",
+      },
+      fontFamily: {
+        "headline": ["Manrope","sans-serif"],
+        "body":     ["Inter","sans-serif"],
+        "label":    ["Inter","sans-serif"],
+      }
+    }
+  }
+}
+</script>
+<style>
+  .mat { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .mat-fill { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .hero-grad { background: linear-gradient(135deg, #0d631b 0%, #2e7d32 100%); }
+  .glass { backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); }
+
+  /* Page routing */
+  .pg { display: none; }
+  .pg.on { display: block; }
+
+  /* Nav active */
+  .nl { transition: color .2s; }
+  .nl.on { color: #0d631b !important; font-weight: 700; border-bottom: 2px solid #0d631b; padding-bottom: 2px; }
+
+  /* Card hover */
+  .ch { transition: transform .3s cubic-bezier(.16,1,.3,1); }
+  .ch:hover { transform: translateY(-5px); }
+
+  /* Form inputs on dark bg */
+  .dark-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid rgba(255,255,255,.2);
+    color: #f8faf8;
+    outline: none;
+    padding: 8px 0;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: .9375rem;
+    transition: border-color .2s;
+  }
+  .dark-input::placeholder { color: rgba(248,250,248,.35); }
+  .dark-input:focus { border-bottom-color: #88d982; }
+
+  /* Light form inputs */
+  .light-input {
+    background: #e1e3e1;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: .25rem .25rem 0 0;
+    outline: none;
+    padding: 14px 16px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: .9375rem;
+    color: #191c1b;
+    transition: border-color .2s;
+  }
+  .light-input:focus { border-bottom-color: #0d631b; }
+
+  /* Mobile bottom nav */
+  .mobile-nav { box-shadow: 0 -4px 20px rgba(25,28,27,.08); }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed pb-16 md:pb-0">
+
+<!-- ─────────────────────────────────────────
+     TOP NAVIGATION
+───────────────────────────────────────── -->
+<nav class="sticky top-0 w-full z-50 bg-emerald-50/75 backdrop-blur-2xl shadow-[0_20px_40px_rgba(25,28,27,.06)] font-headline tracking-tight">
+  <div class="flex justify-between items-center px-6 md:px-8 py-0 max-w-screen-xl mx-auto">
+    <div class="flex items-center gap-3 cursor-pointer" onclick="go('home')">
+      <img src="logo.png" alt="TL Handwerker Logo" class="h-24 w-auto"/>
+      <div class="text-[1.1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none hidden sm:block">TL Handwerker</div>
+    </div>
+    <ul class="hidden md:flex items-center gap-8">
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-home"            onclick="go('home')">Home</a></li>
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-handwerker"      onclick="go('handwerker')">Handwerker Service</a></li>
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-hauswartungen"   onclick="go('hauswartungen')">Hauswartungen</a></li>
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-reinigung"       onclick="go('reinigung')">Reinigung</a></li>
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-schadensmeldung" onclick="go('schadensmeldung')">Schadensmeldung</a></li>
+      <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-kontakt"         onclick="go('kontakt')">Kontakt</a></li>
+    </ul>
+    <button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
+      Jetzt anfragen
+    </button>
+  </div>
+</nav>
+
+<!-- ═════════════════════════════════════════
+     HOME
+═════════════════════════════════════════ -->
+<div id="page-home" class="pg on">
+
+  <!-- Hero -->
+  <section class="relative min-h-[700px] flex items-center overflow-hidden bg-surface py-20 px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-7 z-10">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-xs uppercase tracking-widest mb-6 font-label">Swiss Quality · Bern &amp; Umgebung</span>
+        <h1 class="font-headline text-6xl md:text-8xl font-extrabold text-on-background tracking-tighter leading-[.93] mb-8">
+          Ihr<br>Handwerker<br>in <span class="text-primary italic">Bern.</span>
+        </h1>
+        <p class="text-lg md:text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">
+          Als erster Ansprechpartner für Sie und Ihre Mieter bleibt Ihnen mehr Zeit für Ihr Kerngeschäft. Wir sind für jede Jahreszeit startklar.
+        </p>
+        <div class="flex flex-wrap gap-4">
+          <button class="hero-grad text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity" onclick="go('kontakt')">
+            Planung starten
+            <span class="material-symbols-outlined mat">arrow_forward</span>
+          </button>
+          <button class="bg-surface-container-high text-on-surface px-8 py-4 rounded-xl font-bold hover:bg-surface-container-highest transition-colors" onclick="go('hauswartungen')">
+            Unsere Leistungen
+          </button>
+        </div>
+      </div>
+      <div class="md:col-span-5 relative min-h-[400px]">
+        <div class="absolute inset-0 bg-primary-container rounded-3xl rotate-3 scale-95 opacity-20"></div>
+        <div class="relative z-10 w-full min-h-[400px] rounded-3xl shadow-2xl overflow-hidden">
+          <img src="image1.png" alt="Handwerker Bern" class="absolute inset-0 w-full h-full object-cover object-right"/>
+        </div>
+        <div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-5 rounded-2xl shadow-xl z-20 glass border border-white/20">
+          <div class="flex items-center gap-4">
+            <div class="bg-primary-fixed p-3 rounded-full">
+              <span class="material-symbols-outlined mat-fill text-on-primary-fixed">verified</span>
+            </div>
+            <div>
+              <div class="text-2xl font-bold font-headline tracking-tight">100%</div>
+              <div class="text-[10px] uppercase font-bold tracking-widest text-on-surface-variant">Qualität garantiert</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bento Grid -->
+  <section class="py-24 bg-surface-container-low px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div class="max-w-2xl">
+          <h2 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-4">Unsere Dienstleistungen</h2>
+          <p class="text-on-surface-variant text-lg">Kommunikation, Zuverlässigkeit, Kostenbewusstsein und Kontinuität — für jede Jahreszeit.</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+
+        <!-- Large: Handwerker -->
+        <div class="md:col-span-2 md:row-span-2 bg-surface-container-lowest rounded-3xl relative overflow-hidden flex flex-col group border-l-4 border-primary cursor-pointer ch" onclick="go('handwerker')">
+          <!-- Image top half -->
+          <div class="relative h-[55%] overflow-hidden shrink-0">
+            <img src="generate_Pic/images/handwerker_bento.jpg" alt="Handwerker" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"/>
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-container-lowest"></div>
+          </div>
+          <!-- Content bottom half -->
+          <div class="flex flex-col justify-end flex-1 px-10 pb-10">
+            <h3 class="text-3xl font-bold font-headline mb-3">Handwerker-Service</h3>
+            <p class="text-on-surface-variant mb-5 text-sm">Für Ihre individuellen Wünsche und Bedürfnisse nehmen wir uns immer Zeit und erledigen diese umgehend.</p>
+            <ul class="space-y-2 mb-6">
+              <li class="flex items-center gap-3 text-sm font-medium">
+                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
+                Montagen &amp; Schreinerarbeiten
+              </li>
+              <li class="flex items-center gap-3 text-sm font-medium">
+                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
+                Malerarbeiten &amp; Terassenböden
+              </li>
+              <li class="flex items-center gap-3 text-sm font-medium">
+                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
+                Sanitär &amp; Abflussrohre entstopfen
+              </li>
+            </ul>
+            <button class="text-primary font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+              Details anzeigen <span class="material-symbols-outlined mat">east</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Medium: Reinigung -->
+        <div class="md:col-span-2 bg-primary-container p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between text-on-primary-container group cursor-pointer ch" onclick="go('reinigung')">
+          <img src="generate_Pic/images/reinigung_bento.jpg" alt="Reinigung" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700"/>
+          <div class="relative z-10">
+            <h3 class="text-2xl font-bold font-headline mb-2">Reinigung</h3>
+            <p class="text-sm opacity-80">«Wir schauen nicht weg.» Wohnung, Haus oder Büro — inklusive Garantieabgabe.</p>
+          </div>
+          <div class="relative z-10 flex justify-between items-end">
+            <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Garantie inklusive</div>
+            <span class="material-symbols-outlined mat bg-on-primary-container text-primary-container p-2 rounded-full">cleaning_services</span>
+          </div>
+        </div>
+
+        <!-- Small: Hauswartung -->
+        <div class="rounded-3xl overflow-hidden relative group cursor-pointer ch" onclick="go('hauswartungen')">
+          <img src="generate_Pic/images/hauswartung_bento.jpg" alt="Hauswartungen" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85"></div>
+          <div class="relative z-10 flex flex-col justify-end h-full p-6 min-h-[280px]">
+            <h3 class="font-bold text-lg mb-1 font-headline text-white">Hauswartungen</h3>
+            <p class="text-xs text-white/70">Werterhalt durch stetige Kontrolle und Pflege Ihrer Liegenschaft.</p>
+          </div>
+        </div>
+
+        <!-- Small: Schadensmeldung -->
+        <div class="rounded-3xl overflow-hidden relative group border-l-4 border-error cursor-pointer ch" onclick="go('schadensmeldung')">
+          <img src="generate_Pic/images/schadensmeldung_bento.jpg" alt="Schadensmeldung" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85"></div>
+          <div class="relative z-10 flex flex-col justify-end h-full p-6 min-h-[280px]">
+            <h3 class="font-bold text-lg mb-1 font-headline text-white">Schadensmeldung</h3>
+            <p class="text-xs text-white/70">Schaden melden — wir nehmen umgehend Kontakt auf.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Philosophie Strip -->
+  <section class="py-16 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-5xl font-extrabold font-headline text-primary mb-2">99%</div>
+          <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Zufriedenheit</div>
+        </div>
+        <div>
+          <div class="text-5xl font-extrabold font-headline text-primary mb-2">24h</div>
+          <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Reaktionszeit</div>
+        </div>
+        <div>
+          <div class="text-5xl font-extrabold font-headline text-primary mb-2">+500</div>
+          <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Objekte betreut</div>
+        </div>
+        <div>
+          <div class="text-5xl font-extrabold font-headline text-primary mb-2">4×</div>
+          <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant">Grundsätze</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark CTA / Emergency -->
+  <section class="py-20 px-6 md:px-8 bg-surface">
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-12 bg-on-background text-surface p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/3 h-full bg-primary/20 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      <div class="flex-1 z-10">
+        <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter mb-6 leading-tight">Sofortige Unterstützung<br>erforderlich?</h2>
+        <p class="text-surface-container-high/70 text-lg mb-10 max-w-md">Melden Sie Schäden oder technische Ausfälle direkt über unser Portal. Wir nehmen umgehend Kontakt auf.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-50">Telefon</span>
+            <div class="text-2xl font-bold font-headline">+41 76 389 27 70</div>
+          </div>
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-50">E-Mail</span>
+            <div class="text-xl font-bold font-headline">tomlovren@gmx.ch</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 bg-surface-container-lowest/5 backdrop-blur-xl rounded-2xl p-8 z-10 border border-white/10">
+        <h3 class="text-lg font-bold font-headline mb-6">Schaden schnell melden</h3>
+        <form class="space-y-6" onsubmit="return false;">
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Name</label>
+            <input type="text" placeholder="Ihr Name" class="dark-input"/>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Telefon</label>
+            <input type="tel" placeholder="+41 XX XXX XX XX" class="dark-input"/>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Schadensbeschreibung</label>
+            <input type="text" placeholder="Was ist passiert?" class="dark-input"/>
+          </div>
+          <button type="button" class="w-full bg-primary py-4 rounded-xl font-bold text-on-primary hover:bg-primary-container transition-colors" onclick="go('schadensmeldung')">
+            Schaden jetzt melden
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /home -->
+
+<!-- ═════════════════════════════════════════
+     HANDWERKER SERVICE
+═════════════════════════════════════════ -->
+<div id="page-handwerker" class="pg">
+
+  <section class="relative overflow-hidden bg-surface py-20 px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+      <div class="md:col-span-7 z-10">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-xs uppercase tracking-widest mb-6 font-label">Service 01</span>
+        <h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-[.93] mb-8">
+          Handwerker<br><span class="text-primary italic">Service.</span>
+        </h1>
+        <p class="text-lg text-on-surface-variant max-w-xl mb-8 leading-relaxed">Für Ihre individuellen Wünsche und Bedürfnisse nehmen wir uns immer Zeit und erledigen diese umgehend.</p>
+      </div>
+      <div class="md:col-span-5 relative min-h-[320px]">
+        <div class="absolute inset-0 bg-primary-container rounded-3xl rotate-2 scale-95 opacity-15"></div>
+        <img src="https://placehold.co/600x400/e1e3e1/40493d?text=Handwerker+Service" alt="Handwerker" class="relative z-10 w-full h-full object-cover rounded-3xl shadow-2xl"/>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface-container-low px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter mb-12">Unsere Handwerker-Dienstleistungen</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">build</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Montagen</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Möbel, Regale, Lampen, Bilder und vieles mehr — fachgerecht und sauber montiert.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">carpenter</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Schreinerarbeiten</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Innenausbau, Küchen, Fenster, Böden — massgeschneiderte Lösungen aus erfahrener Hand.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">deck</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Terassenböden Holz</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Hochwertige Holzböden für Terrassen — dauerhaft, witterungsbeständig und handwerklich verlegt.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">format_paint</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Malerarbeiten</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Professionelle Malerarbeiten innen und aussen — saubere Ausführung, brillante Ergebnisse.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">wall</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Trennwände</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Haus und Keller — individuelle Trennwandlösungen für optimale Raumnutzung.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">water_drop</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Sanitäre Vorrichtung entkalken</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Gründliche Entkalkung von Armaturen und sanitären Einrichtungen für mehr Langlebigkeit.</p>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default md:col-span-2">
+          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">plumbing</span>
+          <div>
+            <h3 class="font-headline font-bold text-xl mb-2">Abflussrohr-Entstopfung</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed">Schnelle und zuverlässige Entstopfung verstopfter Abflussrohre — ohne lange Wartezeiten.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <h2 class="font-headline text-2xl font-bold tracking-tighter mb-10 text-on-surface-variant uppercase tracking-widest text-sm">Referenzen</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+1" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+2" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+3" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+4" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+5" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Referenz+6" class="w-full h-[200px] object-cover rounded-2xl"/>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /handwerker -->
+
+<!-- ═════════════════════════════════════════
+     HAUSWARTUNGEN
+═════════════════════════════════════════ -->
+<div id="page-hauswartungen" class="pg">
+
+  <section class="bg-surface py-20 px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-xs uppercase tracking-widest mb-6 font-label">Service 02</span>
+      <h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter leading-[.93] mb-8 max-w-3xl">
+        Wir ersparen Ihnen und den Mietern eine Menge <span class="text-primary italic">Ärger, Zeit und Geld.</span>
+      </h1>
+      <p class="text-lg text-on-surface-variant max-w-2xl mb-4 leading-relaxed">Als erster Ansprechpartner für Sie und Ihre Mieter bleibt Ihnen mehr Zeit für Ihr Kerngeschäft. Unsere Philosophie lautet Kommunikation, Zuverlässigkeit, Kostenbewusstsein und Kontinuität. Über Ihre Anlage wird auf Ihren Wunsch ein Journal geführt und ausserordentliche Vorkommnisse werden Ihnen sofort schriftlich mitgeteilt.</p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-surface-container-low px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto space-y-6">
+
+      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 01</span>
+          <h2 class="font-headline font-bold text-xl">Umgebungsarbeiten</h2>
+        </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Lauben</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Rasenpflege</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Hecken und Baumschnitte</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Unkrautbekämpfung</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Lichtkontrollen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Containerplätze reinigen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Spiel-, Sport- und Parkplätze</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Winterdienst / Schneeräumung</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 02</span>
+          <h2 class="font-headline font-bold text-xl">Unterhaltsarbeiten</h2>
+        </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Treppenhäuser</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Eingangstüren</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Vorplätze</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Fenster</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Boden & Korridor im Keller wischen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Heizraum, Veloraum reinigen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Dachrinnenreinigung</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 03</span>
+          <h2 class="font-headline font-bold text-xl">Parkieranlagen auch mit Schranken</h2>
+        </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Parkplätze reinigen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Garagen reinigen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Ticketrollen Wechsel nach Bedarf</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>24 Stunden Picket Dienst</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Monatliche Kassenabrechnung</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Von Ballmoos Schrankensystem</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 04</span>
+          <h2 class="font-headline font-bold text-xl">Funktionsprüfung Sicherheitstechnik</h2>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Notausgänge</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Brandabschottung</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Not- und Exit-Beleuchtung</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Brandmeldeanlagen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Funktionskontrolle & Übermittlung</li>
+        </ul>
+      </div>
+
+      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+        <div>
+          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 05</span>
+          <h2 class="font-headline font-bold text-xl">Instandhaltung Betriebseinrichtung</h2>
+        </div>
+        <ul class="space-y-2">
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Türen, Schlösser, Türschliessanlagen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Leuchtmittel</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Sanitäranlagen</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Sofortiges Beheben kleiner Mängel</li>
+          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Grosse Mängel nach Absprache — ohne Aufwendungen für den Kunden</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Referenzkunden -->
+  <section class="py-16 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <h3 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-10">Unsere Referenzkunden</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
+          <div class="font-headline font-extrabold text-xl">BDO</div>
+          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Solothurn</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
+          <div class="font-headline font-extrabold text-xl">PROFITASS AG</div>
+          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Etziken</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
+          <div class="font-headline font-extrabold text-xl">HP Immobilien</div>
+          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Bern</div>
+        </div>
+        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
+          <div class="font-headline font-extrabold text-xl">wincasa</div>
+          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Olten</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-12 pb-20 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <h3 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-10">Referenzfotos</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+1" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+2" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+3" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+4" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+5" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Hauswartung+6" class="w-full h-[200px] object-cover rounded-2xl"/>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /hauswartungen -->
+
+<!-- ═════════════════════════════════════════
+     REINIGUNG
+═════════════════════════════════════════ -->
+<div id="page-reinigung" class="pg">
+
+  <section class="bg-surface py-20 px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-xs uppercase tracking-widest mb-6 font-label">Service 03</span>
+      <h1 class="font-headline text-6xl md:text-8xl font-extrabold tracking-tighter leading-[.93] mb-8">
+        «Wir schauen<br>nicht <span class="text-primary italic">weg.»</span>
+      </h1>
+      <p class="text-lg md:text-xl text-on-surface-variant max-w-xl mb-10 leading-relaxed">Wir sorgen dafür, dass Sie sich in Ihren Räumlichkeiten wirklich wohl fühlen können.</p>
+    </div>
+  </section>
+
+  <section class="py-16 bg-surface-container-low px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <div class="mb-12">
+        <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter">Einmalig oder im Abonnement — inklusive Garantieabgabe</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
+          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">01</div>
+          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">apartment</span>
+          <h3 class="font-headline font-bold text-2xl mb-3">Wohnung</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Professionelle Wohnungsreinigung — ob Umzugsreinigung oder regelmässige Pflege, mit Garantieabgabe.</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
+          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">02</div>
+          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">house</span>
+          <h3 class="font-headline font-bold text-2xl mb-3">Haus</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Ganzheitliche Hausreinigung innen und aussen — zuverlässig, gründlich und auf Ihre Bedürfnisse abgestimmt.</p>
+        </div>
+        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
+          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">03</div>
+          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">business_center</span>
+          <h3 class="font-headline font-bold text-2xl mb-3">Büro</h3>
+          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Saubere Arbeitsumgebungen — diskret, gründlich und nach Ihrem Zeitplan.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-10 items-center bg-primary-fixed/30 rounded-3xl p-10">
+      <div class="flex-1">
+        <span class="inline-block bg-primary-container text-on-primary-container text-xs font-bold uppercase tracking-widest px-4 py-1.5 rounded-full mb-4">Garantie inklusive</span>
+        <p class="font-headline font-bold text-2xl tracking-tight">Jede Reinigung wird mit Garantieabgabe durchgeführt — für Ihre Sicherheit und unsere Qualitätsverpflichtung.</p>
+      </div>
+      <button class="hero-grad text-on-primary px-8 py-4 rounded-xl font-bold flex items-center gap-3 shadow-lg shadow-primary/20 hover:opacity-90 transition-opacity shrink-0" onclick="go('kontakt')">
+        Offerte anfragen
+        <span class="material-symbols-outlined mat">arrow_forward</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="py-12 pb-20 bg-surface px-6 md:px-8">
+    <div class="max-w-screen-xl mx-auto">
+      <h3 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-10">Referenzen</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Reinigung+1" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Reinigung+2" class="w-full h-[200px] object-cover rounded-2xl"/>
+        <img src="https://placehold.co/600x440/e1e3e1/707a6c?text=Reinigung+3" class="w-full h-[200px] object-cover rounded-2xl"/>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /reinigung -->
+
+<!-- ═════════════════════════════════════════
+     SCHADENSMELDUNG
+═════════════════════════════════════════ -->
+<div id="page-schadensmeldung" class="pg">
+  <section class="py-20 px-6 md:px-8 bg-surface">
+    <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row gap-12 bg-on-background text-surface p-8 md:p-12 rounded-[2rem] shadow-2xl relative overflow-hidden">
+      <div class="absolute top-0 right-0 w-1/3 h-full bg-error/10 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+      <div class="flex-1 z-10">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-error/20 text-red-400 font-bold text-xs uppercase tracking-widest mb-6">Schadensmeldung</span>
+        <h1 class="font-headline text-4xl md:text-5xl font-bold tracking-tighter leading-tight mb-6">Informieren Sie uns rasch und unkompliziert über Ihren Schadenfall.</h1>
+        <p class="text-surface-container-high/70 text-lg mb-10 max-w-md">Einfach die wenigen Angaben zum Schaden ausfüllen und wir nehmen umgehend mit Ihnen Kontakt auf.</p>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-50">Telefon 24/7</span>
+            <div class="text-2xl font-bold font-headline">+41 76 389 27 70</div>
+          </div>
+          <div class="space-y-2">
+            <span class="text-[10px] uppercase tracking-widest font-bold opacity-50">E-Mail</span>
+            <div class="text-xl font-bold font-headline">tomlovren@gmx.ch</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-1 bg-surface-container-lowest/5 backdrop-blur-xl rounded-2xl p-8 z-10 border border-white/10">
+        <h2 class="text-lg font-bold font-headline mb-6">Schadenformular</h2>
+        <form class="space-y-6" onsubmit="return false;">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Name</label>
+              <input type="text" placeholder="Nachname" class="dark-input"/>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Vorname</label>
+              <input type="text" placeholder="Vorname" class="dark-input"/>
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Verwaltung</label>
+            <input type="text" placeholder="Name der Verwaltung" class="dark-input"/>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Adresse</label>
+            <input type="text" placeholder="Strasse, Hausnummer, PLZ, Ort" class="dark-input"/>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Ihre Tel. Nummer</label>
+            <input type="tel" placeholder="+41 XX XXX XX XX" class="dark-input"/>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Wo? (Ort des Schadens)</label>
+            <textarea placeholder="Beschreiben Sie den Ort des Schadens…" rows="2" style="background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.2);color:#f8faf8;outline:none;padding:8px 0;width:100%;font-family:'Inter',sans-serif;font-size:.9375rem;resize:vertical;transition:border-color .2s;" onfocus="this.style.borderBottomColor='#88d982'" onblur="this.style.borderBottomColor='rgba(255,255,255,.2)'"></textarea>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 opacity-70">Was? (Art des Schadens)</label>
+            <textarea placeholder="Beschreiben Sie den Schaden genau…" rows="2" style="background:transparent;border:none;border-bottom:2px solid rgba(255,255,255,.2);color:#f8faf8;outline:none;padding:8px 0;width:100%;font-family:'Inter',sans-serif;font-size:.9375rem;resize:vertical;transition:border-color .2s;" onfocus="this.style.borderBottomColor='#88d982'" onblur="this.style.borderBottomColor='rgba(255,255,255,.2)'"></textarea>
+          </div>
+          <button type="submit" class="w-full bg-primary py-4 rounded-xl font-bold text-on-primary hover:bg-primary-container transition-colors">
+            Meldung absenden
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div><!-- /schadensmeldung -->
+
+<!-- ═════════════════════════════════════════
+     KONTAKT
+═════════════════════════════════════════ -->
+<div id="page-kontakt" class="pg">
+  <section class="py-20 px-6 md:px-8 bg-surface">
+    <div class="max-w-screen-xl mx-auto">
+      <span class="inline-block px-4 py-1.5 rounded-full bg-surface-container-high text-primary font-bold text-xs uppercase tracking-widest mb-8 font-label">Kontakt</span>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+        <div>
+          <h1 class="font-headline text-5xl md:text-6xl font-extrabold tracking-tighter leading-[.93] mb-10">
+            Kontaktieren<br>Sie <span class="text-primary italic">uns.</span>
+          </h1>
+          <div class="space-y-8 mb-12">
+            <div class="flex gap-4 items-start">
+              <div class="bg-primary-fixed p-3 rounded-full shrink-0">
+                <span class="material-symbols-outlined mat-fill text-on-primary-fixed">person</span>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Inhaber</div>
+                <div class="text-lg font-semibold">Tom Lovrenovic</div>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="bg-primary-fixed p-3 rounded-full shrink-0">
+                <span class="material-symbols-outlined mat-fill text-on-primary-fixed">location_on</span>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Adresse</div>
+                <div class="text-lg font-semibold leading-relaxed">Kehrgasse 31<br>3018 Bern</div>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="bg-primary-fixed p-3 rounded-full shrink-0">
+                <span class="material-symbols-outlined mat-fill text-on-primary-fixed">phone</span>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">Telefon</div>
+                <a href="tel:+41763892770" class="text-lg font-semibold text-primary hover:underline">+41 76 389 27 70</a>
+              </div>
+            </div>
+            <div class="flex gap-4 items-start">
+              <div class="bg-primary-fixed p-3 rounded-full shrink-0">
+                <span class="material-symbols-outlined mat-fill text-on-primary-fixed">mail</span>
+              </div>
+              <div>
+                <div class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-1">E-Mail</div>
+                <a href="mailto:tomlovren@gmx.ch" class="text-lg font-semibold text-primary hover:underline">tomlovren@gmx.ch</a>
+              </div>
+            </div>
+          </div>
+          <div class="relative overflow-hidden rounded-3xl">
+            <img src="https://placehold.co/600x280/e1e3e1/707a6c?text=Karte+Bern+3018" class="w-full h-[240px] object-cover rounded-3xl"/>
+            <div class="absolute inset-0 bg-gradient-to-t from-on-background/20 to-transparent rounded-3xl"></div>
+          </div>
+        </div>
+
+        <div class="bg-surface-container-lowest rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_rgba(25,28,27,.06)]">
+          <h2 class="font-headline text-2xl font-bold tracking-tighter mb-8">Schreiben Sie uns</h2>
+          <form onsubmit="return false;" class="space-y-6">
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 text-on-surface-variant">Ihre E-Mail-Adresse</label>
+              <input type="email" placeholder="ihre@email.ch" class="light-input"/>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 text-on-surface-variant">Name / Vorname</label>
+              <input type="text" placeholder="Vor- und Nachname" class="light-input"/>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 text-on-surface-variant">Tel. Nummer</label>
+              <input type="tel" placeholder="+41 XX XXX XX XX" class="light-input"/>
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold tracking-widest mb-2 text-on-surface-variant">Nachricht</label>
+              <textarea placeholder="Ihre Nachricht an uns…" rows="5" class="light-input" style="border-radius:.25rem .25rem 0 0;resize:vertical;"></textarea>
+            </div>
+            <button type="submit" class="w-full hero-grad text-on-primary py-4 rounded-xl font-bold hover:opacity-90 transition-opacity shadow-lg shadow-primary/20">
+              Nachricht senden
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div><!-- /kontakt -->
+
+<!-- ─────────────────────────────────────────
+     FOOTER
+───────────────────────────────────────── -->
+<footer class="w-full py-12 mt-8 bg-zinc-100 font-body text-sm tracking-wide">
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-10 px-6 md:px-8 max-w-screen-xl mx-auto">
+    <div class="space-y-4">
+      <div class="flex items-center gap-3">
+        <img src="logo.png" alt="TL Handwerker" class="h-24 w-auto"/>
+        <div class="text-base font-bold text-emerald-900 uppercase tracking-tighter font-headline">TL Handwerker</div>
+      </div>
+      <p class="text-zinc-500 leading-relaxed text-xs">Handwerker Service · Hauswartungen · Reinigungen.<br>Kehrgasse 31, 3018 Bern.</p>
+    </div>
+    <div>
+      <h4 class="font-bold text-emerald-800 mb-4 font-headline">Dienstleistungen</h4>
+      <ul class="space-y-3">
+        <li><a class="text-zinc-500 hover:text-emerald-600 transition-colors cursor-pointer" onclick="go('handwerker')">Handwerker Service</a></li>
+        <li><a class="text-zinc-500 hover:text-emerald-600 transition-colors cursor-pointer" onclick="go('hauswartungen')">Hauswartungen</a></li>
+        <li><a class="text-zinc-500 hover:text-emerald-600 transition-colors cursor-pointer" onclick="go('reinigung')">Reinigung</a></li>
+        <li><a class="text-zinc-500 hover:text-emerald-600 transition-colors cursor-pointer" onclick="go('schadensmeldung')">Schadensmeldung</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-emerald-800 mb-4 font-headline">Kontakt</h4>
+      <ul class="space-y-3">
+        <li><a href="tel:+41763892770" class="text-zinc-500 hover:text-emerald-600 transition-colors">+41 76 389 27 70</a></li>
+        <li><a href="mailto:tomlovren@gmx.ch" class="text-zinc-500 hover:text-emerald-600 transition-colors">tomlovren@gmx.ch</a></li>
+        <li><span class="text-zinc-500">Kehrgasse 31, 3018 Bern</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-bold text-emerald-800 mb-4 font-headline">Philosophie</h4>
+      <ul class="space-y-3 text-zinc-500">
+        <li>Kommunikation</li>
+        <li>Zuverlässigkeit</li>
+        <li>Kostenbewusstsein</li>
+        <li>Kontinuität</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-screen-xl mx-auto px-6 md:px-8 mt-10 pt-6 border-t border-zinc-200">
+    <p class="text-zinc-400 text-xs">© 2017–<span id="yr"></span> TL Handwerker · Tom Lovrenovic · Kehrgasse 31, 3018 Bern</p>
+  </div>
+</footer>
+
+<!-- ─────────────────────────────────────────
+     MOBILE BOTTOM NAV
+───────────────────────────────────────── -->
+<div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-surface-container-lowest mobile-nav">
+  <div class="grid grid-cols-5 py-2">
+    <button class="flex flex-col items-center gap-1 py-2 text-primary" onclick="go('home')">
+      <span class="material-symbols-outlined mat-fill" style="font-size:22px">home</span>
+      <span class="text-[9px] uppercase tracking-widest font-bold">Home</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 py-2 text-on-surface-variant" onclick="go('handwerker')">
+      <span class="material-symbols-outlined mat" style="font-size:22px">construction</span>
+      <span class="text-[9px] uppercase tracking-widest font-bold">Handwerker</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 py-2 text-on-surface-variant" onclick="go('reinigung')">
+      <span class="material-symbols-outlined mat" style="font-size:22px">cleaning_services</span>
+      <span class="text-[9px] uppercase tracking-widest font-bold">Reinigung</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 py-2 text-on-surface-variant" onclick="go('schadensmeldung')">
+      <span class="material-symbols-outlined mat" style="font-size:22px">emergency</span>
+      <span class="text-[9px] uppercase tracking-widest font-bold">Schaden</span>
+    </button>
+    <button class="flex flex-col items-center gap-1 py-2 text-on-surface-variant" onclick="go('kontakt')">
+      <span class="material-symbols-outlined mat" style="font-size:22px">phone</span>
+      <span class="text-[9px] uppercase tracking-widest font-bold">Kontakt</span>
+    </button>
+  </div>
+</div>
+
+<script>
+  function go(id) {
+    document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
+    document.querySelectorAll('.nl').forEach(a => a.classList.remove('on'));
+    const pg = document.getElementById('page-' + id);
+    const nl = document.getElementById('nl-' + id);
+    if (pg) pg.classList.add('on');
+    if (nl) nl.classList.add('on');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  document.getElementById('nl-home').classList.add('on');
+  document.getElementById('yr').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
