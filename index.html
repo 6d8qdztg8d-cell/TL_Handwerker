@@ -111,7 +111,7 @@ tailwind.config = {
   .mobile-nav { box-shadow: 0 -4px 20px rgba(25,28,27,.08); }
 </style>
 </head>
-<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed pb-16 md:pb-0">
+<body class="bg-background text-on-background font-body selection:bg-primary-fixed selection:text-on-primary-fixed pb-32 md:pb-0">
 
 <!-- ─────────────────────────────────────────
      TOP NAVIGATION
@@ -130,8 +130,8 @@ tailwind.config = {
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-schadensmeldung" onclick="go('schadensmeldung')">Schadensmeldung</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-kontakt"         onclick="go('kontakt')">Kontakt</a></li>
     </ul>
-    <button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
-      Jetzt anfragen
+    <button class="bg-primary-container text-on-primary-container px-4 py-2 md:px-6 md:py-2.5 rounded-full font-bold text-xs md:text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
+      Anfragen
     </button>
   </div>
 </nav>
@@ -836,7 +836,18 @@ tailwind.config = {
      MOBILE BOTTOM NAV
 ───────────────────────────────────────── -->
 <div class="md:hidden fixed bottom-0 inset-x-0 z-50 bg-surface-container-lowest mobile-nav">
-  <div class="grid grid-cols-6 py-2">
+  <!-- Red emergency call button -->
+  <a href="tel:+41763892770" class="flex items-center gap-3 mx-3 mt-2 mb-1 px-4 py-3 rounded-2xl bg-error text-white active:opacity-80 transition-opacity">
+    <div class="bg-white/15 p-2 rounded-xl shrink-0">
+      <span class="material-symbols-outlined mat-fill text-white" style="font-size:20px">location_on</span>
+    </div>
+    <div class="flex-1 min-w-0">
+      <div class="text-[10px] font-bold uppercase tracking-widest opacity-80">24/7 Notfall-Hotline</div>
+      <div class="text-base font-extrabold font-headline leading-tight">Direkt anrufen</div>
+    </div>
+    <span class="material-symbols-outlined mat-fill text-white" style="font-size:22px">phone</span>
+  </a>
+  <div class="grid grid-cols-6 py-1">
     <button class="flex flex-col items-center gap-1 py-2 text-primary" onclick="go('home')">
       <span class="material-symbols-outlined mat-fill" style="font-size:20px">home</span>
       <span class="text-[8px] uppercase tracking-widest font-bold">Home</span>
