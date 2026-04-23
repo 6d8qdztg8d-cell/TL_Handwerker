@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="width=device-width, initial-scale=0.8, minimum-scale=0.75, viewport-fit=cover" name="viewport"/>
 <title>TL Handwerker – Bern & Umgebung</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"/>
@@ -75,6 +75,454 @@ tailwind.config = {
   .ch { transition: transform .3s cubic-bezier(.16,1,.3,1); }
   .ch:hover { transform: translateY(-5px); }
 
+  /* Premium card system */
+  .card-premium {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(64,73,61,.14);
+    background:
+      radial-gradient(120% 120% at 100% 0%, rgba(136,217,130,.2) 0%, rgba(136,217,130,0) 50%),
+      linear-gradient(180deg, #ffffff 0%, #f5f8f5 100%);
+    box-shadow: 0 16px 34px rgba(25,28,27,.08), inset 0 1px 0 rgba(255,255,255,.9);
+  }
+  .card-premium::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 1.25rem;
+    right: 1.25rem;
+    height: 2px;
+    border-radius: 9999px;
+    background: linear-gradient(90deg, rgba(13,99,27,.72), rgba(136,217,130,.65), rgba(13,99,27,0));
+    pointer-events: none;
+  }
+
+  /* === SERVICE CARDS (Handwerker) === */
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(64,73,61,.09);
+    border-left: 3px solid #0d631b;
+    border-radius: 1.35rem !important;
+    box-shadow: 0 2px 14px rgba(25,28,27,.06), 0 1px 3px rgba(25,28,27,.03);
+    transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s cubic-bezier(.16,1,.3,1);
+    padding: 0 !important;
+  }
+  .service-card::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 0;
+    width: 160px; height: 160px;
+    background: radial-gradient(circle at 100% 0%, rgba(163,246,156,.18) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(13,99,27,.13), 0 4px 12px rgba(25,28,27,.05);
+  }
+  .service-card-inner { padding: 1.75rem 1.85rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+  .service-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.1rem;
+    height: 3.1rem;
+    border-radius: 1rem;
+    background: linear-gradient(145deg, #0d631b 0%, #1a7a26 100%);
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(13,99,27,.32);
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: .1rem;
+  }
+  .service-card h3 { letter-spacing: -.025em; }
+
+  /* === AREA CARDS (Hauswartungen) === */
+  .area-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(64,73,61,.09);
+    border-left: 4px solid #0d631b;
+    border-radius: 1.35rem !important;
+    box-shadow: 0 2px 16px rgba(25,28,27,.06);
+    padding: 2rem 2.25rem !important;
+  }
+  .area-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 200px; height: 120px;
+    background: radial-gradient(ellipse at 100% 100%, rgba(13,99,27,.06) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .area-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(13,99,27,.11), rgba(13,99,27,.04));
+    border: 1px solid rgba(13,99,27,.18);
+    color: #0d631b;
+    border-radius: .55rem;
+    padding: .3rem .7rem;
+    font-size: .62rem;
+    font-weight: 800;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    margin-bottom: .65rem;
+    font-family: 'Manrope', sans-serif;
+  }
+  .area-card ul li {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding-top: .35rem;
+    padding-bottom: .35rem;
+    border-bottom: 1px solid rgba(64,73,61,.07);
+    font-size: .875rem;
+    color: #40493d;
+  }
+  .area-card ul li:last-child { border-bottom: 0; }
+  .area-li-dot {
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: #0d631b;
+    flex-shrink: 0;
+    opacity: .55;
+  }
+
+  /* === CLEAN CARDS (Reinigung) === */
+  .clean-card {
+    position: relative;
+    overflow: hidden;
+    background: #ffffff;
+    border: 1px solid rgba(64,73,61,.09);
+    border-radius: 1.65rem !important;
+    box-shadow: 0 4px 22px rgba(25,28,27,.07);
+    padding: 0 !important;
+    transition: transform .28s cubic-bezier(.16,1,.3,1), box-shadow .28s;
+  }
+  .clean-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 38px rgba(13,99,27,.12);
+  }
+  .clean-card-top {
+    height: 5px;
+    background: linear-gradient(90deg, #0d631b 0%, #88d982 100%);
+  }
+  .clean-card-body { padding: 2rem 2.1rem 2.25rem; display: flex; flex-direction: column; }
+  .clean-num {
+    font-size: 4rem;
+    font-weight: 800;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: -.04em;
+    line-height: 1;
+    margin-bottom: 1.1rem;
+    background: linear-gradient(135deg, rgba(13,99,27,.22) 0%, rgba(136,217,130,.28) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: block;
+  }
+  .clean-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: .85rem;
+    background: linear-gradient(145deg, rgba(13,99,27,.12), rgba(136,217,130,.20));
+    color: #0d631b;
+    margin-bottom: .85rem;
+  }
+  .clean-card h3 { letter-spacing: -.025em; }
+
+  /* === CLIENT CARDS === */
+  .client-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 152px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: .25rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f4f8f4 100%);
+    border: 1px solid rgba(64,73,61,.10);
+    border-radius: 1.35rem !important;
+    padding: 1.75rem 2rem !important;
+    box-shadow: 0 2px 12px rgba(25,28,27,.05);
+    transition: transform .25s cubic-bezier(.16,1,.3,1), box-shadow .25s;
+  }
+  .client-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #0d631b 0%, rgba(136,217,130,.6) 100%);
+    border-radius: 9999px 9999px 0 0;
+  }
+  .client-card::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 90px; height: 90px;
+    background: radial-gradient(circle at 100% 100%, rgba(13,99,27,.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .client-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(13,99,27,.11);
+  }
+  .client-card .font-headline { letter-spacing: -.03em; }
+
+  .contact-card .light-input {
+    background: rgba(225,227,225,.72);
+    border-radius: .65rem .65rem 0 0;
+  }
+
+  /* ═══════════════════════════════════
+     APPLE-UI BENTO CARDS
+  ═══════════════════════════════════ */
+  .bento-card {
+    border-radius: 2.25rem;
+    overflow: hidden;
+    position: relative;
+    transition: transform .45s cubic-bezier(.23,1,.32,1), box-shadow .45s cubic-bezier(.23,1,.32,1);
+    cursor: pointer;
+  }
+  .bento-card:hover { transform: scale(1.015); }
+
+  /* --- Handwerker (large) --- */
+  .bento-hw {
+    background: #fff;
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.05),
+      0 4px 6px rgba(0,0,0,.04),
+      0 16px 40px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+  }
+  .bento-hw:hover {
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,.05),
+      0 8px 16px rgba(0,0,0,.07),
+      0 30px 60px rgba(0,0,0,.12);
+  }
+  .bento-hw-photo {
+    width: 100%;
+    flex-shrink: 0;
+    overflow: hidden;
+    height: 54%;
+    min-height: 170px;
+    position: relative;
+  }
+  .bento-hw-photo img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    transition: transform .7s cubic-bezier(.23,1,.32,1);
+    display: block;
+  }
+  .bento-card:hover .bento-hw-photo img { transform: scale(1.06); }
+  .bento-hw-photo-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,.04) 0%, rgba(0,0,0,.35) 100%);
+  }
+  .bento-hw-label {
+    position: absolute; top: 1rem; left: 1.1rem;
+    background: rgba(13,99,27,.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: .6rem; font-weight: 800;
+    letter-spacing: .14em; text-transform: uppercase;
+    padding: .28rem .65rem; border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,.2);
+  }
+  .bento-hw-body {
+    flex: 1;
+    background: #fff;
+    padding: 1.3rem 1.4rem 1.5rem;
+    display: flex; flex-direction: column; justify-content: space-between;
+    border-top: 1px solid rgba(0,0,0,.05);
+  }
+  @media (min-width: 768px) {
+    .bento-hw-body { padding: 1.5rem 1.65rem 1.75rem; }
+  }
+  .bento-hw-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.35rem; font-weight: 900;
+    color: #1d1d1f; letter-spacing: -.035em; line-height: 1.15;
+    margin-bottom: .25rem;
+  }
+  @media (min-width: 768px) { .bento-hw-title { font-size: 1.55rem; } }
+  .bento-hw-sub { font-size: .78rem; color: #86868b; letter-spacing: -.01em; margin-bottom: 1rem; }
+  .bento-hw-list { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.1rem; }
+  .bento-hw-item {
+    display: flex; align-items: center; gap: .7rem;
+    padding: .5rem 0;
+    border-bottom: 1px solid rgba(0,0,0,.055);
+  }
+  .bento-hw-item:last-child { border-bottom: 0; }
+  .bento-hw-dot {
+    width: 1.1rem; height: 1.1rem; border-radius: 9999px;
+    background: #0d631b;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .bento-hw-dot .material-symbols-outlined { font-size: 11px; color: #fff; }
+  .bento-hw-item span { font-size: .8rem; font-weight: 600; color: #1d1d1f; letter-spacing: -.01em; }
+  .bento-hw-cta {
+    display: inline-flex; align-items: center; gap: .3rem;
+    color: #0d631b; font-size: .8rem; font-weight: 700; letter-spacing: -.01em;
+    transition: gap .25s cubic-bezier(.23,1,.32,1);
+  }
+  .bento-hw-cta .material-symbols-outlined { font-size: 17px; }
+  .bento-card:hover .bento-hw-cta { gap: .6rem; }
+
+  /* --- Reinigung (medium) --- */
+  .bento-clean {
+    background: #0c3d12;
+    box-shadow: 0 0 0 1px rgba(0,0,0,.1), 0 16px 40px rgba(0,0,0,.18);
+  }
+  .bento-clean-photo {
+    position: absolute; inset: 0;
+    transition: transform .7s cubic-bezier(.23,1,.32,1);
+  }
+  .bento-clean-photo img {
+    width: 100%; height: 100%; object-fit: cover;
+    opacity: .22; mix-blend-mode: luminosity;
+  }
+  .bento-card:hover .bento-clean-photo { transform: scale(1.05); }
+  .bento-clean-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(7,28,9,.7) 0%, rgba(13,99,27,.15) 100%);
+    pointer-events: none;
+  }
+  .bento-clean-body {
+    position: relative; z-index: 2;
+    height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 1.3rem 1.4rem;
+    min-height: 200px;
+  }
+  @media (min-width: 768px) { .bento-clean-body { padding: 1.6rem 1.75rem; } }
+  .bento-clean-tag {
+    display: inline-flex; align-items: center; gap: .4rem;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    color: rgba(255,255,255,.75); font-size: .6rem; font-weight: 700;
+    letter-spacing: .13em; text-transform: uppercase;
+    padding: .3rem .65rem; border-radius: 9999px;
+    align-self: flex-start;
+  }
+  .bento-clean-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 2rem; font-weight: 900;
+    color: #fff; letter-spacing: -.045em; line-height: 1;
+    margin-bottom: .4rem;
+  }
+  @media (min-width: 768px) { .bento-clean-title { font-size: 2.4rem; } }
+  .bento-clean-desc { font-size: .78rem; color: rgba(255,255,255,.55); line-height: 1.5; max-width: 28ch; }
+  .bento-clean-footer { display: flex; align-items: center; justify-content: space-between; margin-top: .75rem; }
+  .bento-clean-badge {
+    display: inline-flex; align-items: center; gap: .45rem;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    padding: .45rem .8rem; border-radius: 9999px;
+    color: #fff; font-size: .7rem; font-weight: 600;
+  }
+  .bento-clean-badge .material-symbols-outlined { font-size: 14px; color: #88d982; }
+  .bento-clean-icon {
+    width: 2.4rem; height: 2.4rem;
+    background: rgba(255,255,255,.1);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 1rem;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .bento-clean-icon .material-symbols-outlined { font-size: 20px; color: rgba(255,255,255,.8); }
+
+  /* --- Small photo cards (Hauswartung / Schadensmeldung) --- */
+  .bento-photo {
+    box-shadow: 0 0 0 1px rgba(0,0,0,.07), 0 12px 32px rgba(0,0,0,.14);
+    min-height: 220px;
+  }
+  @media (min-width: 768px) { .bento-photo { min-height: 0; } }
+  .bento-photo-bg {
+    position: absolute; inset: 0;
+    transition: transform .7s cubic-bezier(.23,1,.32,1);
+  }
+  .bento-photo-bg img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  .bento-card:hover .bento-photo-bg { transform: scale(1.06); }
+  .bento-photo-shade {
+    position: absolute; inset: 0;
+    background: linear-gradient(175deg, rgba(0,0,0,.04) 20%, rgba(0,0,0,.68) 100%);
+    pointer-events: none;
+  }
+  .bento-photo-content {
+    position: relative; z-index: 2;
+    height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    padding: 1.1rem 1.2rem;
+  }
+  .bento-photo-pill {
+    align-self: flex-start;
+    background: rgba(255,255,255,.15);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,.18);
+    color: rgba(255,255,255,.9); font-size: .58rem; font-weight: 700;
+    letter-spacing: .13em; text-transform: uppercase;
+    padding: .28rem .65rem; border-radius: 9999px;
+  }
+  .bento-photo-pill.danger {
+    background: rgba(186,26,26,.65);
+    border-color: rgba(186,26,26,.4);
+    display: flex; align-items: center; gap: .35rem;
+  }
+  .bento-photo-pill.danger .material-symbols-outlined { font-size: 11px; }
+  .bento-photo-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 1.15rem; font-weight: 900;
+    color: #fff; letter-spacing: -.03em; line-height: 1.15; margin-bottom: .3rem;
+  }
+  .bento-photo-desc { font-size: .72rem; color: rgba(255,255,255,.58); line-height: 1.45; }
+
+  /* ── Mobile bento tweaks ─────────────────── */
+  @media (max-width: 767px) {
+    /* Handwerker card */
+    .bento-hw-photo { height: 195px; min-height: 0; flex: none; }
+    .bento-hw-body { padding: .95rem 1.05rem 1.1rem; }
+    .bento-hw-title { font-size: 1.15rem; }
+    .bento-hw-sub { font-size: .7rem; margin-bottom: .6rem; }
+    .bento-hw-item { padding: .38rem 0; gap: .55rem; }
+    .bento-hw-item span { font-size: .74rem; }
+    .bento-hw-dot { width: .95rem; height: .95rem; }
+    .bento-hw-dot .material-symbols-outlined { font-size: 10px; }
+    .bento-hw-list { margin-bottom: .75rem; }
+    .bento-hw-cta { font-size: .74rem; }
+    .bento-hw-cta .material-symbols-outlined { font-size: 15px; }
+    /* Reinigung card */
+    .bento-clean-body { padding: 1rem 1.1rem; min-height: 170px; }
+    .bento-clean-title { font-size: 1.65rem; }
+    .bento-clean-desc { font-size: .7rem; }
+    .bento-clean-footer { margin-top: .6rem; }
+    .bento-clean-badge { font-size: .62rem; padding: .38rem .65rem; }
+    .bento-clean-badge .material-symbols-outlined { font-size: 12px; }
+    .bento-clean-icon { width: 2rem; height: 2rem; border-radius: .75rem; }
+    .bento-clean-icon .material-symbols-outlined { font-size: 17px; }
+    /* Small photo cards */
+    .bento-photo { min-height: 160px; }
+    .bento-photo-content { padding: .85rem .95rem; }
+    .bento-photo-title { font-size: 1rem; margin-bottom: .2rem; }
+    .bento-photo-desc { font-size: .67rem; }
+    .bento-photo-pill { font-size: .55rem; padding: .25rem .55rem; }
+    /* Tighter grid on mobile */
+    .grid.gap-3 { gap: .5rem; }
+  }
+
   /* Form inputs on dark bg */
   .dark-input {
     background: transparent;
@@ -107,6 +555,93 @@ tailwind.config = {
   }
   .light-input:focus { border-bottom-color: #0d631b; }
 
+  /* Mobile top nav */
+  .mobile-tab-row {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .mobile-tab-row::-webkit-scrollbar { display: none; }
+  .mobile-tab-wrap { position: relative; }
+  .mobile-tab-fade {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 4.5rem;
+    pointer-events: none;
+    background: linear-gradient(to right, rgba(232,241,236,0), rgba(232,241,236,.92) 55%, rgba(232,241,236,1));
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .mobile-tab-fade.show { opacity: 1; }
+  .mobile-swipe-hint {
+    position: absolute;
+    right: .35rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(4px);
+    z-index: 2;
+    pointer-events: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    min-width: 2.1rem;
+    height: 1.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255,255,255,.8);
+    background: rgba(248,250,248,.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(25,28,27,.12);
+    opacity: 0;
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  .mobile-swipe-hint .material-symbols-outlined {
+    font-size: 15px;
+    line-height: 1;
+    color: #3d5645;
+  }
+  .mobile-swipe-hint .trail {
+    margin-left: -9px;
+    opacity: .45;
+  }
+  .mobile-swipe-hint.show {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+  .mobile-swipe-hint.show .chev-wrap {
+    animation: swipe-hint-nudge 1.35s ease-in-out infinite;
+  }
+  @keyframes swipe-hint-nudge {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+  .mtn {
+    display: inline-flex;
+    align-items: center;
+    gap: .35rem;
+    border: 1px solid rgba(13,99,27,.08);
+    background: rgba(255,255,255,.75);
+    color: #40493d;
+    border-radius: 9999px;
+    padding: .42rem .72rem;
+    white-space: nowrap;
+    font-size: .66rem;
+    line-height: 1;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    font-weight: 700;
+    transition: background-color .2s, color .2s, box-shadow .2s, transform .2s, border-color .2s;
+  }
+  .mtn .material-symbols-outlined { font-size: 15px; line-height: 1; }
+  .mtn.on {
+    background: #0d631b;
+    color: #ffffff;
+    border-color: #0d631b;
+    box-shadow: 0 10px 22px rgba(13,99,27,.22);
+  }
+  .mtn:active { transform: scale(.97); }
+
   /* Mobile bottom nav */
   .mobile-nav { box-shadow: 0 -4px 20px rgba(25,28,27,.08); }
 </style>
@@ -117,38 +652,64 @@ tailwind.config = {
      TOP NAVIGATION
 ───────────────────────────────────────── -->
 <nav class="sticky top-0 w-full z-50 bg-emerald-50/75 backdrop-blur-2xl shadow-[0_20px_40px_rgba(25,28,27,.06)] font-headline tracking-tight">
-  <div class="flex justify-between items-center px-3 md:px-8 py-1 md:py-0 max-w-screen-xl mx-auto">
-    <!-- Mobile: icons left of logo | Desktop: logo + name -->
-    <div class="flex items-center gap-1">
-      <!-- 6 icon buttons — mobile only, left of logo -->
-      <div class="flex items-center md:hidden">
-        <button class="flex items-center justify-center p-1.5 text-primary" onclick="go('home')">
-          <span class="material-symbols-outlined mat-fill" style="font-size:20px">home</span>
-        </button>
-        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('handwerker')">
-          <span class="material-symbols-outlined mat" style="font-size:20px">construction</span>
-        </button>
-        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('hauswartungen')">
-          <span class="material-symbols-outlined mat" style="font-size:20px">home_work</span>
-        </button>
-        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('reinigung')">
-          <span class="material-symbols-outlined mat" style="font-size:20px">cleaning_services</span>
-        </button>
-        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('schadensmeldung')">
-          <span class="material-symbols-outlined mat" style="font-size:20px">emergency</span>
-        </button>
-        <button class="flex items-center justify-center p-1.5 text-on-surface-variant" onclick="go('kontakt')">
-          <span class="material-symbols-outlined mat" style="font-size:20px">phone</span>
-        </button>
+  <!-- Mobile navigation -->
+  <div class="md:hidden px-4 pt-2 pb-3 max-w-screen-xl mx-auto">
+    <div class="flex items-center justify-between gap-3 mb-2.5">
+      <button type="button" class="flex items-center gap-2 min-w-0" onclick="go('home')">
+        <img src="logo.png" alt="TL Handwerker Logo" class="h-11 w-auto shrink-0"/>
+        <div class="min-w-0 text-left">
+          <div class="text-[1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none">TL Handwerker</div>
+          <div class="text-[10px] text-emerald-800/75 font-bold uppercase tracking-[0.18em] mt-1">Bern &amp; Umgebung</div>
+        </div>
+      </button>
+      <a href="tel:+41763892770" class="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+        <span class="material-symbols-outlined mat-fill" style="font-size:20px">call</span>
+      </a>
+    </div>
+    <div class="mobile-tab-wrap">
+      <div id="mobileTabRow" class="mobile-tab-row flex items-center gap-2 overflow-x-auto pb-1 -mx-1 px-1 pr-12">
+      <button type="button" class="mtn on" id="mtn-home" onclick="go('home')">
+        <span class="material-symbols-outlined mat-fill">home</span>
+        Home
+      </button>
+      <button type="button" class="mtn" id="mtn-handwerker" onclick="go('handwerker')">
+        <span class="material-symbols-outlined mat">construction</span>
+        Handwerker
+      </button>
+      <button type="button" class="mtn" id="mtn-hauswartungen" onclick="go('hauswartungen')">
+        <span class="material-symbols-outlined mat">home_work</span>
+        Hauswartung
+      </button>
+      <button type="button" class="mtn" id="mtn-reinigung" onclick="go('reinigung')">
+        <span class="material-symbols-outlined mat">cleaning_services</span>
+        Reinigung
+      </button>
+      <button type="button" class="mtn" id="mtn-schadensmeldung" onclick="go('schadensmeldung')">
+        <span class="material-symbols-outlined mat">emergency</span>
+        Schaden
+      </button>
+      <button type="button" class="mtn" id="mtn-kontakt" onclick="go('kontakt')">
+        <span class="material-symbols-outlined mat">phone</span>
+        Kontakt
+      </button>
       </div>
-      <!-- Logo -->
-      <div class="flex items-center gap-2 cursor-pointer" onclick="go('home')">
-        <img src="logo.png" alt="TL Handwerker Logo" class="h-12 md:h-24 w-auto"/>
-        <div class="text-[1.1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none hidden sm:block">TL Handwerker</div>
+      <div id="mobileTabFade" class="mobile-tab-fade" aria-hidden="true"></div>
+      <div id="mobileSwipeHint" class="mobile-swipe-hint" aria-hidden="true">
+        <span class="chev-wrap inline-flex items-center">
+          <span class="material-symbols-outlined">chevron_right</span>
+          <span class="material-symbols-outlined trail">chevron_right</span>
+        </span>
       </div>
     </div>
-    <!-- Desktop nav links -->
-    <ul class="hidden md:flex items-center gap-8">
+  </div>
+
+  <!-- Desktop navigation -->
+  <div class="hidden md:flex justify-between items-center px-8 py-0 max-w-screen-xl mx-auto">
+    <div class="flex items-center gap-2 cursor-pointer" onclick="go('home')">
+      <img src="logo.png" alt="TL Handwerker Logo" class="h-24 w-auto"/>
+      <div class="text-[1.1rem] font-extrabold tracking-tighter text-emerald-900 uppercase leading-none">TL Handwerker</div>
+    </div>
+    <ul class="flex items-center gap-8">
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-home"            onclick="go('home')">Home</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-handwerker"      onclick="go('handwerker')">Handwerker Service</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-hauswartungen"   onclick="go('hauswartungen')">Hauswartungen</a></li>
@@ -156,8 +717,7 @@ tailwind.config = {
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-schadensmeldung" onclick="go('schadensmeldung')">Schadensmeldung</a></li>
       <li><a class="nl text-zinc-600 hover:text-emerald-800 text-sm cursor-pointer" id="nl-kontakt"         onclick="go('kontakt')">Kontakt</a></li>
     </ul>
-    <!-- Anfragen — desktop only -->
-    <button class="hidden md:block bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
+    <button class="bg-primary-container text-on-primary-container px-6 py-2.5 rounded-full font-bold text-sm active:scale-95 transition-transform hover:opacity-85" onclick="go('kontakt')">
       Anfragen
     </button>
   </div>
@@ -218,69 +778,100 @@ tailwind.config = {
           <p class="text-on-surface-variant text-sm md:text-lg">Kommunikation, Zuverlässigkeit, Kostenbewusstsein und Kontinuität — für jede Jahreszeit.</p>
         </div>
       </div>
-      <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 h-auto md:h-[600px]">
+      <div class="grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-2 md:gap-4 h-auto md:h-[620px]">
 
         <!-- Large: Handwerker -->
-        <div class="col-span-2 md:row-span-2 bg-surface-container-lowest rounded-3xl relative overflow-hidden flex flex-col group border-l-4 border-primary cursor-pointer ch" onclick="go('handwerker')">
-          <!-- Image top half -->
-          <div class="relative h-[55%] overflow-hidden shrink-0">
-            <img src="generate_Pic/images/handwerker_bento.jpg" alt="Handwerker" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"/>
-            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-container-lowest"></div>
+        <div class="col-span-2 md:row-span-2 bento-card bento-hw" onclick="go('handwerker')">
+          <div class="bento-hw-photo">
+            <img src="generate_Pic/images/handwerker_bento.jpg" alt="Handwerker"/>
+            <div class="bento-hw-photo-overlay"></div>
+            <span class="bento-hw-label">Service 01</span>
           </div>
-          <!-- Content bottom half -->
-          <div class="flex flex-col justify-end flex-1 px-5 pb-5 md:px-10 md:pb-10">
-            <h3 class="text-xl md:text-3xl font-bold font-headline mb-2 md:mb-3">Handwerker-Service</h3>
-            <p class="text-on-surface-variant mb-5 text-sm">Für Ihre individuellen Wünsche und Bedürfnisse nehmen wir uns immer Zeit und erledigen diese umgehend.</p>
-            <ul class="space-y-2 mb-6">
-              <li class="flex items-center gap-3 text-sm font-medium">
-                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
-                Montagen &amp; Schreinerarbeiten
-              </li>
-              <li class="flex items-center gap-3 text-sm font-medium">
-                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
-                Malerarbeiten &amp; Terassenböden
-              </li>
-              <li class="flex items-center gap-3 text-sm font-medium">
-                <span class="material-symbols-outlined mat-fill text-primary text-sm">check_circle</span>
-                Sanitär &amp; Abflussrohre entstopfen
-              </li>
-            </ul>
-            <button class="text-primary font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
-              Details anzeigen <span class="material-symbols-outlined mat">east</span>
+          <div class="bento-hw-body">
+            <div>
+              <p class="bento-hw-title">Handwerker-Service</p>
+              <p class="bento-hw-sub">Schnell. Sauber. Zuverlässig.</p>
+              <div class="bento-hw-list">
+                <div class="bento-hw-item">
+                  <div class="bento-hw-dot"><span class="material-symbols-outlined mat-fill">check</span></div>
+                  <span>Montagen &amp; Schreinerarbeiten</span>
+                </div>
+                <div class="bento-hw-item">
+                  <div class="bento-hw-dot"><span class="material-symbols-outlined mat-fill">check</span></div>
+                  <span>Malerarbeiten &amp; Terassenböden</span>
+                </div>
+                <div class="bento-hw-item">
+                  <div class="bento-hw-dot"><span class="material-symbols-outlined mat-fill">check</span></div>
+                  <span>Sanitär &amp; Abflussrohre entstopfen</span>
+                </div>
+              </div>
+            </div>
+            <button class="bento-hw-cta">
+              Details anzeigen
+              <span class="material-symbols-outlined mat">arrow_forward</span>
             </button>
           </div>
         </div>
 
         <!-- Medium: Reinigung -->
-        <div class="col-span-2 bg-primary-container p-6 md:p-8 rounded-3xl relative overflow-hidden flex flex-col justify-between text-on-primary-container group cursor-pointer ch" onclick="go('reinigung')">
-          <img src="generate_Pic/images/reinigung_bento.jpg" alt="Reinigung" class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700"/>
-          <div class="relative z-10">
-            <h3 class="text-2xl font-bold font-headline mb-2">Reinigung</h3>
-            <p class="text-sm opacity-80">«Wir schauen nicht weg.» Wohnung, Haus oder Büro — inklusive Garantieabgabe.</p>
+        <div class="col-span-2 bento-card bento-clean" onclick="go('reinigung')">
+          <div class="bento-clean-photo">
+            <img src="generate_Pic/images/reinigung_bento.jpg" alt="Reinigung"/>
           </div>
-          <div class="relative z-10 flex justify-between items-end">
-            <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest">Garantie inklusive</div>
-            <span class="material-symbols-outlined mat bg-on-primary-container text-primary-container p-2 rounded-full">cleaning_services</span>
+          <div class="bento-clean-overlay"></div>
+          <div class="bento-clean-body">
+            <div>
+              <span class="bento-clean-tag">
+                <span class="material-symbols-outlined mat" style="font-size:11px">cleaning_services</span>
+                Service 03
+              </span>
+            </div>
+            <div>
+              <p class="bento-clean-title">Reinigung.</p>
+              <p class="bento-clean-desc">«Wir schauen nicht weg.» Wohnung, Haus oder Büro.</p>
+              <div class="bento-clean-footer">
+                <div class="bento-clean-badge">
+                  <span class="material-symbols-outlined mat-fill">verified</span>
+                  Garantie inklusive
+                </div>
+                <div class="bento-clean-icon">
+                  <span class="material-symbols-outlined mat">arrow_forward</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Small: Hauswartung -->
-        <div class="rounded-3xl overflow-hidden relative group cursor-pointer ch" onclick="go('hauswartungen')">
-          <img src="generate_Pic/images/hauswartung_bento.jpg" alt="Hauswartungen" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85"></div>
-          <div class="relative z-10 flex flex-col justify-end h-full p-4 md:p-6 min-h-[220px] md:min-h-[280px]">
-            <h3 class="font-bold text-lg mb-1 font-headline text-white">Hauswartungen</h3>
-            <p class="text-xs text-white/70">Werterhalt durch stetige Kontrolle und Pflege Ihrer Liegenschaft.</p>
+        <div class="bento-card bento-photo" onclick="go('hauswartungen')">
+          <div class="bento-photo-bg">
+            <img src="generate_Pic/images/hauswartung_bento.jpg" alt="Hauswartungen"/>
+          </div>
+          <div class="bento-photo-shade"></div>
+          <div class="bento-photo-content">
+            <span class="bento-photo-pill">Hauswartung</span>
+            <div>
+              <p class="bento-photo-title">Hauswartungen</p>
+              <p class="bento-photo-desc">Werterhalt durch stetige Kontrolle und Pflege.</p>
+            </div>
           </div>
         </div>
 
         <!-- Small: Schadensmeldung -->
-        <div class="rounded-3xl overflow-hidden relative group border-l-4 border-error cursor-pointer ch" onclick="go('schadensmeldung')">
-          <img src="generate_Pic/images/schadensmeldung_bento.jpg" alt="Schadensmeldung" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"/>
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/85"></div>
-          <div class="relative z-10 flex flex-col justify-end h-full p-4 md:p-6 min-h-[220px] md:min-h-[280px]">
-            <h3 class="font-bold text-lg mb-1 font-headline text-white">Schadensmeldung</h3>
-            <p class="text-xs text-white/70">Schaden melden — wir nehmen umgehend Kontakt auf.</p>
+        <div class="bento-card bento-photo" onclick="go('schadensmeldung')" style="background:#111">
+          <div class="bento-photo-bg">
+            <img src="generate_Pic/images/schadensmeldung_bento.jpg" alt="Schadensmeldung" style="opacity:.45"/>
+          </div>
+          <div class="bento-photo-shade"></div>
+          <div class="bento-photo-content">
+            <span class="bento-photo-pill danger">
+              <span class="material-symbols-outlined mat-fill">emergency</span>
+              Notfall
+            </span>
+            <div>
+              <p class="bento-photo-title">Schadensmeldung</p>
+              <p class="bento-photo-desc">Schaden melden — umgehende Kontaktaufnahme.</p>
+            </div>
           </div>
         </div>
 
@@ -379,61 +970,75 @@ tailwind.config = {
   <section class="py-10 md:py-20 bg-surface-container-low px-4 md:px-8">
     <div class="max-w-screen-xl mx-auto">
       <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter mb-12">Unsere Handwerker-Dienstleistungen</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">build</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Montagen</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Möbel, Regale, Lampen, Bilder und vieles mehr — fachgerecht und sauber montiert.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">build</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Montagen</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Möbel, Regale, Lampen, Bilder und vieles mehr — fachgerecht und sauber montiert.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">carpenter</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Schreinerarbeiten</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Innenausbau, Küchen, Fenster, Böden — massgeschneiderte Lösungen aus erfahrener Hand.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">carpenter</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Schreinerarbeiten</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Innenausbau, Küchen, Fenster, Böden — massgeschneiderte Lösungen aus erfahrener Hand.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">deck</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Terassenböden Holz</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Hochwertige Holzböden für Terrassen — dauerhaft, witterungsbeständig und handwerklich verlegt.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">deck</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Terassenböden Holz</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Hochwertige Holzböden für Terrassen — dauerhaft, witterungsbeständig und handwerklich verlegt.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">format_paint</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Malerarbeiten</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Professionelle Malerarbeiten innen und aussen — saubere Ausführung, brillante Ergebnisse.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">format_paint</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Malerarbeiten</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Professionelle Malerarbeiten innen und aussen — saubere Ausführung, brillante Ergebnisse.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">wall</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Trennwände</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Haus und Keller — individuelle Trennwandlösungen für optimale Raumnutzung.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">vertical_split</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Trennwände</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Haus und Keller — individuelle Trennwandlösungen für optimale Raumnutzung.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">water_drop</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Sanitäre Vorrichtung entkalken</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Gründliche Entkalkung von Armaturen und sanitären Einrichtungen für mehr Langlebigkeit.</p>
+        <div class="service-card cursor-default">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">water_drop</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Sanitäre Vorrichtung entkalken</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Gründliche Entkalkung von Armaturen und sanitären Einrichtungen für mehr Langlebigkeit.</p>
+            </div>
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest p-8 rounded-2xl flex gap-6 border-l-4 border-primary ch cursor-default md:col-span-2">
-          <span class="material-symbols-outlined mat text-primary text-3xl shrink-0 mt-1">plumbing</span>
-          <div>
-            <h3 class="font-headline font-bold text-xl mb-2">Abflussrohr-Entstopfung</h3>
-            <p class="text-on-surface-variant text-sm leading-relaxed">Schnelle und zuverlässige Entstopfung verstopfter Abflussrohre — ohne lange Wartezeiten.</p>
+        <div class="service-card cursor-default md:col-span-2">
+          <div class="service-card-inner">
+            <span class="material-symbols-outlined mat service-icon">plumbing</span>
+            <div>
+              <h3 class="font-headline font-bold text-xl mb-2">Abflussrohr-Entstopfung</h3>
+              <p class="text-on-surface-variant text-sm leading-relaxed">Schnelle und zuverlässige Entstopfung verstopfter Abflussrohre — ohne lange Wartezeiten.</p>
+            </div>
           </div>
         </div>
 
@@ -473,81 +1078,81 @@ tailwind.config = {
   </section>
 
   <section class="py-12 bg-surface-container-low px-6 md:px-8">
-    <div class="max-w-screen-xl mx-auto space-y-6">
+    <div class="max-w-screen-xl mx-auto space-y-4">
 
-      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+      <div class="area-card grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
         <div>
-          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 01</span>
-          <h2 class="font-headline font-bold text-xl">Umgebungsarbeiten</h2>
+          <span class="area-badge">Bereich 01</span>
+          <h2 class="font-headline font-bold text-lg leading-snug">Umgebungsarbeiten</h2>
         </div>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Lauben</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Rasenpflege</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Hecken und Baumschnitte</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Unkrautbekämpfung</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Lichtkontrollen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Containerplätze reinigen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Spiel-, Sport- und Parkplätze</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Winterdienst / Schneeräumung</li>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+          <li><span class="area-li-dot"></span>Lauben</li>
+          <li><span class="area-li-dot"></span>Rasenpflege</li>
+          <li><span class="area-li-dot"></span>Hecken und Baumschnitte</li>
+          <li><span class="area-li-dot"></span>Unkrautbekämpfung</li>
+          <li><span class="area-li-dot"></span>Lichtkontrollen</li>
+          <li><span class="area-li-dot"></span>Containerplätze reinigen</li>
+          <li><span class="area-li-dot"></span>Spiel-, Sport- und Parkplätze</li>
+          <li><span class="area-li-dot"></span>Winterdienst / Schneeräumung</li>
         </ul>
       </div>
 
-      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+      <div class="area-card grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
         <div>
-          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 02</span>
-          <h2 class="font-headline font-bold text-xl">Unterhaltsarbeiten</h2>
+          <span class="area-badge">Bereich 02</span>
+          <h2 class="font-headline font-bold text-lg leading-snug">Unterhaltsarbeiten</h2>
         </div>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Treppenhäuser</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Eingangstüren</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Vorplätze</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Fenster</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Boden & Korridor im Keller wischen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Heizraum, Veloraum reinigen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Dachrinnenreinigung</li>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+          <li><span class="area-li-dot"></span>Treppenhäuser</li>
+          <li><span class="area-li-dot"></span>Eingangstüren</li>
+          <li><span class="area-li-dot"></span>Vorplätze</li>
+          <li><span class="area-li-dot"></span>Fenster</li>
+          <li><span class="area-li-dot"></span>Boden &amp; Korridor im Keller wischen</li>
+          <li><span class="area-li-dot"></span>Heizraum, Veloraum reinigen</li>
+          <li><span class="area-li-dot"></span>Dachrinnenreinigung</li>
         </ul>
       </div>
 
-      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+      <div class="area-card grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
         <div>
-          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 03</span>
-          <h2 class="font-headline font-bold text-xl">Parkieranlagen auch mit Schranken</h2>
+          <span class="area-badge">Bereich 03</span>
+          <h2 class="font-headline font-bold text-lg leading-snug">Parkieranlagen auch mit Schranken</h2>
         </div>
-        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-2">
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Parkplätze reinigen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Garagen reinigen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Ticketrollen Wechsel nach Bedarf</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>24 Stunden Picket Dienst</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Monatliche Kassenabrechnung</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Von Ballmoos Schrankensystem</li>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
+          <li><span class="area-li-dot"></span>Parkplätze reinigen</li>
+          <li><span class="area-li-dot"></span>Garagen reinigen</li>
+          <li><span class="area-li-dot"></span>Ticketrollen Wechsel nach Bedarf</li>
+          <li><span class="area-li-dot"></span>24 Stunden Picket Dienst</li>
+          <li><span class="area-li-dot"></span>Monatliche Kassenabrechnung</li>
+          <li><span class="area-li-dot"></span>Von Ballmoos Schrankensystem</li>
         </ul>
       </div>
 
-      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+      <div class="area-card grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
         <div>
-          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 04</span>
-          <h2 class="font-headline font-bold text-xl">Funktionsprüfung Sicherheitstechnik</h2>
+          <span class="area-badge">Bereich 04</span>
+          <h2 class="font-headline font-bold text-lg leading-snug">Funktionsprüfung Sicherheitstechnik</h2>
         </div>
-        <ul class="space-y-2">
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Notausgänge</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Brandabschottung</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Not- und Exit-Beleuchtung</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Brandmeldeanlagen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Funktionskontrolle & Übermittlung</li>
+        <ul>
+          <li><span class="area-li-dot"></span>Notausgänge</li>
+          <li><span class="area-li-dot"></span>Brandabschottung</li>
+          <li><span class="area-li-dot"></span>Not- und Exit-Beleuchtung</li>
+          <li><span class="area-li-dot"></span>Brandmeldeanlagen</li>
+          <li><span class="area-li-dot"></span>Funktionskontrolle &amp; Übermittlung</li>
         </ul>
       </div>
 
-      <div class="bg-surface-container-lowest rounded-2xl p-8 md:p-10 grid md:grid-cols-[220px_1fr] gap-8">
+      <div class="area-card grid md:grid-cols-[200px_1fr] gap-6 md:gap-10">
         <div>
-          <span class="text-[10px] uppercase tracking-widest font-bold text-primary block mb-2">Bereich 05</span>
-          <h2 class="font-headline font-bold text-xl">Instandhaltung Betriebseinrichtung</h2>
+          <span class="area-badge">Bereich 05</span>
+          <h2 class="font-headline font-bold text-lg leading-snug">Instandhaltung Betriebseinrichtung</h2>
         </div>
-        <ul class="space-y-2">
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Türen, Schlösser, Türschliessanlagen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Leuchtmittel</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Sanitäranlagen</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Sofortiges Beheben kleiner Mängel</li>
-          <li class="flex gap-2 items-baseline text-sm text-on-surface-variant"><span class="material-symbols-outlined mat text-primary" style="font-size:14px">arrow_right</span>Grosse Mängel nach Absprache — ohne Aufwendungen für den Kunden</li>
+        <ul>
+          <li><span class="area-li-dot"></span>Türen, Schlösser, Türschliessanlagen</li>
+          <li><span class="area-li-dot"></span>Leuchtmittel</li>
+          <li><span class="area-li-dot"></span>Sanitäranlagen</li>
+          <li><span class="area-li-dot"></span>Sofortiges Beheben kleiner Mängel</li>
+          <li><span class="area-li-dot"></span>Grosse Mängel nach Absprache — ohne Aufwendungen für den Kunden</li>
         </ul>
       </div>
 
@@ -558,22 +1163,38 @@ tailwind.config = {
   <section class="py-16 bg-surface px-6 md:px-8">
     <div class="max-w-screen-xl mx-auto">
       <h3 class="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant mb-10">Unsere Referenzkunden</h3>
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
-          <div class="font-headline font-extrabold text-xl">BDO</div>
-          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Solothurn</div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="client-card">
+          <div class="text-[9px] uppercase tracking-[.14em] font-bold text-primary/70 mb-1">Referenzkunde</div>
+          <div class="font-headline font-extrabold text-xl text-on-background">BDO</div>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span class="material-symbols-outlined mat" style="font-size:13px;color:#707a6c">location_on</span>
+            <div class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Solothurn</div>
+          </div>
         </div>
-        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
-          <div class="font-headline font-extrabold text-xl">PROFITASS AG</div>
-          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Etziken</div>
+        <div class="client-card">
+          <div class="text-[9px] uppercase tracking-[.14em] font-bold text-primary/70 mb-1">Referenzkunde</div>
+          <div class="font-headline font-extrabold text-xl text-on-background">PROFITASS AG</div>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span class="material-symbols-outlined mat" style="font-size:13px;color:#707a6c">location_on</span>
+            <div class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Etziken</div>
+          </div>
         </div>
-        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
-          <div class="font-headline font-extrabold text-xl">HP Immobilien</div>
-          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Bern</div>
+        <div class="client-card">
+          <div class="text-[9px] uppercase tracking-[.14em] font-bold text-primary/70 mb-1">Referenzkunde</div>
+          <div class="font-headline font-extrabold text-xl text-on-background">HP Immobilien</div>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span class="material-symbols-outlined mat" style="font-size:13px;color:#707a6c">location_on</span>
+            <div class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Bern</div>
+          </div>
         </div>
-        <div class="bg-surface-container-lowest rounded-2xl p-8 border-l-4 border-primary">
-          <div class="font-headline font-extrabold text-xl">wincasa</div>
-          <div class="text-[10px] uppercase tracking-widest text-on-surface-variant mt-1">Olten</div>
+        <div class="client-card">
+          <div class="text-[9px] uppercase tracking-[.14em] font-bold text-primary/70 mb-1">Referenzkunde</div>
+          <div class="font-headline font-extrabold text-xl text-on-background">wincasa</div>
+          <div class="flex items-center gap-1.5 mt-2">
+            <span class="material-symbols-outlined mat" style="font-size:13px;color:#707a6c">location_on</span>
+            <div class="text-[11px] uppercase tracking-widest text-on-surface-variant font-semibold">Olten</div>
+          </div>
         </div>
       </div>
     </div>
@@ -615,24 +1236,33 @@ tailwind.config = {
       <div class="mb-12">
         <h2 class="font-headline text-3xl md:text-4xl font-bold tracking-tighter">Einmalig oder im Abonnement — inklusive Garantieabgabe</h2>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
-          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">01</div>
-          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">apartment</span>
-          <h3 class="font-headline font-bold text-2xl mb-3">Wohnung</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Professionelle Wohnungsreinigung — ob Umzugsreinigung oder regelmässige Pflege, mit Garantieabgabe.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="clean-card">
+          <div class="clean-card-top"></div>
+          <div class="clean-card-body">
+            <span class="clean-num">01</span>
+            <div class="clean-icon"><span class="material-symbols-outlined mat" style="font-size:1.35rem">apartment</span></div>
+            <h3 class="font-headline font-bold text-2xl mb-3">Wohnung</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Professionelle Wohnungsreinigung — ob Umzugsreinigung oder regelmässige Pflege, mit Garantieabgabe.</p>
+          </div>
         </div>
-        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
-          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">02</div>
-          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">house</span>
-          <h3 class="font-headline font-bold text-2xl mb-3">Haus</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Ganzheitliche Hausreinigung innen und aussen — zuverlässig, gründlich und auf Ihre Bedürfnisse abgestimmt.</p>
+        <div class="clean-card">
+          <div class="clean-card-top"></div>
+          <div class="clean-card-body">
+            <span class="clean-num">02</span>
+            <div class="clean-icon"><span class="material-symbols-outlined mat" style="font-size:1.35rem">house</span></div>
+            <h3 class="font-headline font-bold text-2xl mb-3">Haus</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Ganzheitliche Hausreinigung innen und aussen — zuverlässig, gründlich und auf Ihre Bedürfnisse abgestimmt.</p>
+          </div>
         </div>
-        <div class="bg-surface-container-lowest rounded-3xl p-10 flex flex-col">
-          <div class="text-6xl font-extrabold font-headline text-surface-container-highest leading-none mb-8">03</div>
-          <span class="material-symbols-outlined mat text-primary text-3xl mb-4">business_center</span>
-          <h3 class="font-headline font-bold text-2xl mb-3">Büro</h3>
-          <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Saubere Arbeitsumgebungen — diskret, gründlich und nach Ihrem Zeitplan.</p>
+        <div class="clean-card">
+          <div class="clean-card-top"></div>
+          <div class="clean-card-body">
+            <span class="clean-num">03</span>
+            <div class="clean-icon"><span class="material-symbols-outlined mat" style="font-size:1.35rem">business_center</span></div>
+            <h3 class="font-headline font-bold text-2xl mb-3">Büro</h3>
+            <p class="text-on-surface-variant text-sm leading-relaxed flex-1">Saubere Arbeitsumgebungen — diskret, gründlich und nach Ihrem Zeitplan.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -785,7 +1415,7 @@ tailwind.config = {
           </div>
         </div>
 
-        <div class="bg-surface-container-lowest rounded-3xl p-8 md:p-10 shadow-[0_20px_60px_rgba(25,28,27,.06)]">
+        <div class="contact-card card-premium rounded-[1.8rem] p-8 md:p-10">
           <h2 class="font-headline text-2xl font-bold tracking-tighter mb-8">Schreiben Sie uns</h2>
           <form onsubmit="return false;" class="space-y-6">
             <div>
@@ -876,17 +1506,45 @@ tailwind.config = {
 </div>
 
 <script>
+  function setActiveNav(id) {
+    document.querySelectorAll('.nl').forEach(a => a.classList.remove('on'));
+    document.querySelectorAll('.mtn').forEach(a => a.classList.remove('on'));
+    const nl = document.getElementById('nl-' + id);
+    const mtn = document.getElementById('mtn-' + id);
+    if (nl) nl.classList.add('on');
+    if (mtn) mtn.classList.add('on');
+  }
+
+  function updateMobileSwipeHint() {
+    const row = document.getElementById('mobileTabRow');
+    const hint = document.getElementById('mobileSwipeHint');
+    const fade = document.getElementById('mobileTabFade');
+    if (!row || !hint || !fade) return;
+
+    const canScroll = row.scrollWidth > row.clientWidth + 6;
+    const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 8;
+    const show = canScroll && !atEnd;
+
+    hint.classList.toggle('show', show);
+    fade.classList.toggle('show', show);
+  }
+
   function go(id) {
     document.querySelectorAll('.pg').forEach(p => p.classList.remove('on'));
-    document.querySelectorAll('.nl').forEach(a => a.classList.remove('on'));
     const pg = document.getElementById('page-' + id);
-    const nl = document.getElementById('nl-' + id);
     if (pg) pg.classList.add('on');
-    if (nl) nl.classList.add('on');
+    setActiveNav(id);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-  document.getElementById('nl-home').classList.add('on');
+  setActiveNav('home');
   document.getElementById('yr').textContent = new Date().getFullYear();
+
+  const mobileTabRow = document.getElementById('mobileTabRow');
+  if (mobileTabRow) {
+    mobileTabRow.addEventListener('scroll', updateMobileSwipeHint, { passive: true });
+    window.addEventListener('resize', updateMobileSwipeHint);
+    requestAnimationFrame(updateMobileSwipeHint);
+  }
 </script>
 </body>
 </html>
